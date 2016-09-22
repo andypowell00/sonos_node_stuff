@@ -1,0 +1,10 @@
+{
+  "name": "Sonos_Listener",
+  "version": "0.0.1",
+  "description": "Office fun times",
+  "dependencies": {
+    "socket.io": "latest",
+    "sonos": "^0.8.0"
+  },
+  "author": "AP"
+}
