@@ -2,20 +2,27 @@
     <head>
         <meta http-equiv="Access-Control-Allow-Origin" content="*">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script> 
+        <script src="https://cdn.socket.io/socket.io-1.0.4.js"></script> 
         <script>
             $(function() {
+                    var socket;
                     $('#connect').show();
                     $('#connect').click(function() {
                         initSocket();
                         $(this).hide();
                     });
+                     
+
             });
              function initSocket(){
-                    var socket = io('10.20.0.143');
+                    socket = io.connect();
                     socket.on('newtrack', function (data) {
                     console.log(data);
-                    $('#xmlData').html(data);
+                    var title = data.title;
+                    var artist = data.artist;
+                    var album = data.album;
+                    var position = data.position;
+                    $('#fullData').html(title + "<br>" + artist + "<br>" + album + "<br>" + position);
                     
                     });
                     }
@@ -25,11 +32,11 @@
     </head>
     <body> 
         <!-- test divs -->
-        <div id="xmlData"></div>
-        <br><br><br>
+        
         <div id="fullData"></div>
         <br><br><br>
         
-        <button id="connect">Connect</button>
+        <button id="connect">Connect</button><br>
+        
     </body> 
 </html> 
