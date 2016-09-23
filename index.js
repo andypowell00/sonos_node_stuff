@@ -15,7 +15,7 @@ io.on('connection', function (socket) {
   _sonos.startlistening(socket);
   console.log('client connected');
   
-
+  
   socket.on('disconnect', function () {
     console.log('user disconnected');
     

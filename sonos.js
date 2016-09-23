@@ -16,20 +16,22 @@ x.listen(function(err) {
   x.addService('/MediaRenderer/AVTransport/Event', function(error, sid) {
     if (error) throw err;
     console.log('Successfully subscribed, with subscription id', sid);
-    
   });
-
   x.on('serviceEvent', function(endpoint, sid, data) {
     console.log('Received event from', endpoint, '(' + sid + ') with data:', data, '\n\n');
 
  _sonos.currentTrack(function(err, track) {
         socket.emit('newtrack', track);
         });
-
- 
  });
 });
+}//end startlistening()
+
+,veto:  function(){
+
+
 }
+
 }
 
 
