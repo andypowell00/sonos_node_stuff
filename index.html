@@ -15,7 +15,7 @@
 
             });
              function initSocket(){
-                    socket = io.connect();
+                    socket = io.connect('10.20.0.156');
                     socket.on('newtrack', function (data) {
                     console.log(data);
                     var title = data.title;

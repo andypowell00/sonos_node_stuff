@@ -4,7 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 
-server.listen(80);
+server.listen(80,'10.20.0.156');
 
 app.get('/', function (req, res) {
     res.sendFile( __dirname + '/index.html' );
