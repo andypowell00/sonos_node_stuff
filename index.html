@@ -6,20 +6,18 @@
         <script>
             $(function() {
                     var socket;
-                    $('#connect').show();
-                    $('#connect').click(function() {
-                        initSocket();
-                        $(this).hide();
-                    });
-                     $('#listen').click(function() {
-                        listen();
-                        $(this).hide();
+                    initSocket();
+                    listen();
+                       
+                    $('#veto').click(function() {
+                        veto();
+                       
                     });
                      
 
             });
              function initSocket(){
-                    socket = io.connect('http://10.20.0.156:5337');                  
+                    socket = io.connect('http://localhost:5337');                  
                     
                     socket.on('newtrack', function (data) {
                     console.log(data);
@@ -36,6 +34,11 @@
                          console.log('listening...');
                         });
              }
+             function veto(){
+                  socket.emit("veto", function() {
+                         console.log('veto...');
+                        });
+             }
         </script>
         
 
@@ -46,8 +49,8 @@
         <div id="fullData"></div>
         <br><br><br>
         
-        <button id="connect">Connect</button><br>
-        <button id="listen">Listen</button><br>
+
+        <button id="veto">Veto</button><br>
         
     </body> 
 </html> 
