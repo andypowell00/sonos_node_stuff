@@ -4,7 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 
-server.listen(80,'10.20.0.156');
+server.listen(5337,'0.0.0.0');
 
 app.get('/', function (req, res) {
     res.sendFile( __dirname + '/index.html' );
@@ -12,12 +12,15 @@ app.get('/', function (req, res) {
 
 
 io.on('connection', function (socket) {
-  _sonos.startlistening(socket);
-  console.log('client connected');
-  
+  socket.join('sonosroom'); //throw all connections into same room
+  console.log('client connected');  
   
   socket.on('disconnect', function () {
-    console.log('user disconnected');
+    console.log('user disconnected');   
     
+  });
+  socket.on('listen', function() {
+    console.log('start listening....');
+    _sonos.startlistening(io);
   });
 });

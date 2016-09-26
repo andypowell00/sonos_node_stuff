@@ -11,11 +11,16 @@
                         initSocket();
                         $(this).hide();
                     });
+                     $('#listen').click(function() {
+                        listen();
+                        $(this).hide();
+                    });
                      
 
             });
              function initSocket(){
-                    socket = io.connect('10.20.0.156');
+                    socket = io.connect('http://10.20.0.156:5337');                  
+                    
                     socket.on('newtrack', function (data) {
                     console.log(data);
                     var title = data.title;
@@ -25,7 +30,12 @@
                     $('#fullData').html(title + "<br>" + artist + "<br>" + album + "<br>" + position);
                     
                     });
-                    }
+             }
+             function listen(){
+                    socket.emit("listen", function() {
+                         console.log('listening...');
+                        });
+             }
         </script>
         
 
@@ -37,6 +47,7 @@
         <br><br><br>
         
         <button id="connect">Connect</button><br>
+        <button id="listen">Listen</button><br>
         
     </body> 
 </html> 

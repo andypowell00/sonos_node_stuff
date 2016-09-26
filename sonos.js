@@ -8,7 +8,7 @@ var x = new Listener(_sonos);
 
 //connect to sonos and emit when event occurs
 module.exports = {
-startlistening: function (socket){
+startlistening: function (io){
 
 x.listen(function(err) {
   if (err) throw err;
@@ -20,17 +20,25 @@ x.listen(function(err) {
   x.on('serviceEvent', function(endpoint, sid, data) {
     console.log('Received event from', endpoint, '(' + sid + ') with data:', data, '\n\n');
 
- _sonos.currentTrack(function(err, track) {
-        socket.emit('newtrack', track);
-        });
+  currTrack(io);
  });
 });
 }//end startlistening()
-
+,newConnect: function(io){
+       currTrack(io);
+}
 ,veto:  function(){
 
 
 }
+
+}
+
+function currTrack(io){
+        _sonos.currentTrack(function(err, track) {
+        if(err) throw err;
+        io.to('sonosroom').emit('newtrack', track); //broadcast changes to the room
+        });
 
 }
 
