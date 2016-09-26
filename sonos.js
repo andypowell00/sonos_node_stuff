@@ -1,6 +1,7 @@
 
 var Sonos = require('./node_modules/sonos/index').Sonos
 var util = require('util');
+var _spot = require('./spot');
 var Listener = require('./node_modules/sonos/lib/events/listener.js')
 var _sonos = new Sonos(process.env.SONOS_HOST || '10.20.0.62')
 var x = new Listener(_sonos);
@@ -62,6 +63,8 @@ function currTrack(io){
         _sonos.currentTrack(function(err, track) {
         if(err) throw err;
         io.to('sonosroom').emit('newtrack', track); //broadcast changes to the room
+        console.log("artist= " + track.artist);
+        _spot.search(track.artist);
         });
 }
 

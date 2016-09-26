@@ -4,7 +4,8 @@
   "description": "Office fun times",
   "dependencies": {
     "socket.io": "latest",
-    "sonos": "^0.8.0"
+    "sonos": "^0.8.0",
+    "spotify-web-api-node": "^2.3.5"
   },
   "author": "AP"
 }
