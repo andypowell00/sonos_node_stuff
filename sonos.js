@@ -33,15 +33,18 @@ x.listen(function(err) {
 }
 ,veto:  function(){
 
-      /*_sonos.next(function (err, nexted) {
+       _sonos.queueNext('http://www.freesfx.co.uk/rx2/mp3s/5/16800_1460741032.mp3', function (err, playing) {
+           console.log([err, playing])
+           _sonos.next(function (err, nexted) {
         if (!err || !nexted) {
           console.log('Complete');
         } else {
           console.log('errrrrrrrrrrrrrr');
-        }});*/
-        _sonos.play('http://www.freesfx.co.uk/rx2/mp3s/5/16800_1460741032.mp3', function (err, playing) {
-          console.log([err, playing])
-        });
+        }});
+        })
+
+        
+        
 
 }
 ,checkListener: function(){
@@ -62,9 +65,10 @@ killListener: function(){
 function currTrack(io){
         _sonos.currentTrack(function(err, track) {
         if(err) throw err;
+        _spot.search(track.artist);
         io.to('sonosroom').emit('newtrack', track); //broadcast changes to the room
         console.log("artist= " + track.artist);
-        _spot.search(track.artist);
+        
         });
 }
 

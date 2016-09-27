@@ -8,12 +8,9 @@ module.exports = {
   search: function(name){
       spotifyApi.searchArtists(name)
   .then(function(data) {
-    //console.log('....test....');
+
     console.log('test = ' + util.inspect(data.body.artists.items[0]));
-    //console.log();
-    console.log('Search artists by ' + name + ' ', data.body);
-    
-   
+
   }, function(err) {
     console.error(err);
   });
@@ -24,7 +21,5 @@ module.exports = {
     console.error(err);
   });*/
   }
-
-
 
 }
