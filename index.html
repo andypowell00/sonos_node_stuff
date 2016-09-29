@@ -2,7 +2,7 @@
     <head>
         <meta http-equiv="Access-Control-Allow-Origin" content="*">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="https://cdn.socket.io/socket.io-1.0.4.js"></script> 
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> 
         <script>
             $(function() {
                     var socket;
@@ -10,14 +10,13 @@
                     listen();
                        
                     $('#veto').click(function() {
-                        veto();
-                       
+                        veto();                       
                     });
                      
 
             });
              function initSocket(){
-                    socket = io.connect('http://10.20.0.156:5337');                  
+                    socket = io.connect('http://localhost:5337');                  
                     
                     socket.on('newtrack', function (data) {
                     console.log(data);
